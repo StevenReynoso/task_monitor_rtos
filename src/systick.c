@@ -1,5 +1,4 @@
 #include "systick.h"
-
 #include <stdint.h>
 
 volatile uint32_t current_time = 0;
@@ -18,10 +17,6 @@ void delay_us(uint32_t us){
 void delay_ms(uint32_t ms) {
     uint32_t start = current_time;
     while ((current_time - start) < ms);
-}
-
-uint32_t millis(void) {
-    return current_time;
 }
 
 int SysTick_Config(uint32_t ticks){

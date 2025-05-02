@@ -9,6 +9,7 @@ void gpio_set_mode(uint16_t pin, uint8_t mode){
     gpio->MODER |= ((mode & 0x3u) << (gpio_pin * 2));
 }
 
+// static cause we only call this in gpio_init_pin.
 static void rcc_gpio_enr(uint8_t bank_num){
     RCC_AHB1ENR |= (1 << bank_num);
 }

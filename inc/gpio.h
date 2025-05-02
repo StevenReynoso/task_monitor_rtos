@@ -7,13 +7,17 @@ struct gpio {
     volatile uint32_t MODER, OTYPER, OSPEEDR, PUPDR, IDR, ODR;
 };
 
+// Gpio setup, only need the one bus for ports,
 #define RCC_AHB1ENR (*(volatile uint32_t *) (0x40023800 + 0x30))
 
+//nice setup to split the port and pin, making easier declaration in main.
 #define GPIO(bank) ((struct gpio *)(0x40020000 + (0x400 * ((bank) - 'A'))))
 #define PIN(bank, num) (((bank - 'A') << 8) | (num))
 #define PINNO(pin) ((pin) & 0xFF)
 #define PINBANK(pin) ((pin) >> 8)
 
+
+// struct setup for easier pin setup in main.
 typedef enum{
     GPIO_MODE_INPUT         = 0x00,
     GPIO_MODE_OUTPUT        = 0x01,

@@ -22,8 +22,6 @@
 */
 
 
-
-
 #include "gpio.h"
 #include "systick.h"
 #include <stdint.h>
@@ -117,7 +115,7 @@ void lcd_set_cursor(uint8_t col, uint8_t row) {                 // bottom row st
 }
 
 void lcd_init(void) {
-    delay_ms(50);                                          // wait 15ms or more after vdd reaches 4.5v, wait 4.1 ms or more, wait 100 micro seconds, end of initialization
+    delay_ms(50);                                         // wait 15ms or more after vdd reaches 4.5v, wait 4.1 ms or more, wait 100 micro seconds, end of initialization
 
     lcd_send_nibble(0x03); // 8bit sync 1 // send 3 to db4 and db5
     lcd_pulse_enable();
