@@ -18,7 +18,7 @@ typedef enum{
     GPIO_MODE_INPUT         = 0x00,
     GPIO_MODE_OUTPUT        = 0x01,
     GPIO_MODE_AF            = 0x02,
-    GPIO_MODE_ANALOG        = 0x03
+    GPIO_MODE_ANALOG        = 0x03,
 } gpio_mode_t;
 
 typedef enum{
@@ -36,7 +36,7 @@ typedef enum{
 typedef enum{
     GPIO_NO_PULL            = 0x00, 
     GPIO_PULL_UP            = 0x01,
-    GPIO_PULL_DOWN          = 0x02
+    GPIO_PULL_DOWN          = 0x02,
 } gpio_pupdr_t;
 
 typedef struct{
@@ -48,5 +48,6 @@ typedef struct{
 } gpio_config_t;
 
 void gpio_init_pin(gpio_config_t cfg);
+void gpio_set_mode(uint16_t pin, uint8_t mode);
 
 #endif //GPIO_H

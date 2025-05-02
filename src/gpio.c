@@ -1,12 +1,21 @@
 #include "gpio.h"
 
-void rcc_gpio_enr(uint8_t bank_num){
+void gpio_set_mode(uint16_t pin, uint8_t mode){
+    struct gpio *gpio = GPIO('A' + PINBANK(pin));
+
+    uint8_t gpio_pin = PINNO(pin);
+
+    gpio->MODER &= ~(0x3u << (gpio_pin * 2));
+    gpio->MODER |= ((mode & 0x3u) << (gpio_pin * 2));
+}
+
+static void rcc_gpio_enr(uint8_t bank_num){
     RCC_AHB1ENR |= (1 << bank_num);
 }
 
 
 void gpio_init_pin(gpio_config_t cfg){
-    struct gpio * gpio = GPIO(PINBANK(cfg.pin) + 'A');
+    struct gpio *gpio = GPIO(PINBANK(cfg.pin) + 'A');
     uint8_t gpio_pin = PINNO(cfg.pin);
 
 
