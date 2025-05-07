@@ -24,6 +24,7 @@
 
 #include "gpio.h"
 #include "systick.h"
+#include "rtos.h"
 #include <stdint.h>
 
 
@@ -139,4 +140,8 @@ void lcd_init(void) {
     lcd_send_cmd(0x01);  // Clear display
     lcd_send_cmd(0x06);  // Entry mode: increment                 |   0110  | can shift display with 0x07 and get a scrolling effect.
     delay_ms(2);
+}
+
+void lcd_print_char(char c){
+    lcd_send_data(c);
 }

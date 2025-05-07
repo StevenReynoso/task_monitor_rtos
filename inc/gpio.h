@@ -9,6 +9,7 @@ struct gpio {
 
 // Gpio setup, only need the one bus for ports,
 #define RCC_AHB1ENR (*(volatile uint32_t *) (0x40023800 + 0x30))
+#define RCC_APB1ENR (*(volatile uint32_t *) (0x40023800 + 0x40))
 
 //nice setup to split the port and pin, making easier declaration in main.
 #define GPIO(bank) ((struct gpio *)(0x40020000 + (0x400 * ((bank) - 'A'))))
@@ -53,5 +54,6 @@ typedef struct{
 
 void gpio_init_pin(gpio_config_t cfg);
 void gpio_set_mode(uint16_t pin, uint8_t mode);
+void gpio_set_af(uint16_t pin, uint8_t af);
 
 #endif //GPIO_H

@@ -35,3 +35,15 @@ void gpio_init_pin(gpio_config_t cfg){
     gpio->PUPDR |= ((cfg.pull & 0x03) << (gpio_pin * 2));
 
 }
+
+void gpio_set_af(uint16_t pin, uint8_t af) {
+    uint8_t bank = PINBANK(pin);
+    uint8_t gpio_pin = PINNO(pin);
+
+    // Compute address of AFR[0] or AFR[1]
+    volatile uint32_t *AFR = (volatile uint32_t *)(0x40020000 + (0x400 * bank) + 0x20 + ((gpio_pin / 8) * 4));
+    uint8_t shift = (gpio_pin % 8) * 4;
+
+    *AFR &= ~(0xF << shift);
+    *AFR |=  (af  << shift);
+}
